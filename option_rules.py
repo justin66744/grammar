@@ -12,7 +12,7 @@ class Rules:
 
     def generate(self, grammar):
         if not self._options:
-            return-
+            return
         try:
             selected = random.randrange(self._total_weight)
             total = 0
