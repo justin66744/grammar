@@ -5,16 +5,22 @@ from symbols import Terminal, Variable
 
 def parse_file(filename):
     grammar = Grammar()
-    with open(filename, 'r') as file:
-        lines = [line.strip() for line in file if line.strip()]
+    try:
+        with open(filename, 'r') as file:
+            lines = [line.strip() for line in file if line.strip()]
+    except FileNotFoundError:
+        print(f"File doesn't exist")
+    except IOError:
+        print(f"Couldn't open file")
+
     i = 0
 
     while i < len(lines):
         if lines[i] == '{':
             i += 1
-            variable = lines[i]
+            var = lines[i]
             i += 1
-            rule = Rules(variable)
+            rule = Rules(var)
 
             while i < len(lines) and lines[i] != '}':
                 pieces = lines[i].split()
@@ -29,7 +35,7 @@ def parse_file(filename):
                         symbols.append(Terminal(symbol))
                 rule.add_option(weight, symbols)
                 i += 1
-            grammar.add_rule(variable, rule)
+            grammar.add_rule(var, rule)
             i += 1
         else:
             i += 1

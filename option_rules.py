@@ -12,9 +12,12 @@ class Rules:
 
     def generate(self, grammar):
         if not self._options:
-            return
-        selected = random.randrange(self._total_weight)
-        total = 0
+            return-
+        try:
+            selected = random.randrange(self._total_weight)
+            total = 0
+        except:
+            raise ValueError("Nothing to choose from")
 
         for weight, symbols in self._options:
             total += weight
