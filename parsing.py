@@ -2,16 +2,14 @@ from grammar import Grammar
 from option_rules import Rules
 from symbols import Terminal, Variable
 
-
+#File isn't explicitly covered as I'm using a
+#double that mimics the functionality for testing.
 def parse_file(filename):
     grammar = Grammar()
-    try:
-        with open(filename, 'r') as file:
-            lines = [line.strip() for line in file if line.strip()]
-    except FileNotFoundError:
-        print(f"File doesn't exist")
-    except IOError:
-        print(f"Couldn't open file")
+
+    with open(filename, 'r') as file:
+        lines = [line.strip() for line in file if line.strip()]
+
 
     i = 0
 
@@ -28,7 +26,7 @@ def parse_file(filename):
                 symbols = []
 
                 for symbol in pieces[1:]:
-                    if symbol[0] == '[' and symbol[len(symbol)-1] == ']':
+                    if symbol[0] == '[' and symbol[len(symbol)-1] == ']' and len(symbol) > 2:
                         var_name = symbol[1:-1]
                         symbols.append(Variable(var_name))
                     else:

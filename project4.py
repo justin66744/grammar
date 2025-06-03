@@ -16,15 +16,13 @@ def generate_sentence(grammar, start_var):
     return ' '.join(pieces)
 
 def main() -> None:
-    try:
-        inp_file, sentences, start_var = read_inp()
-        res = parse_file(inp_file)
 
-        for x in range(sentences):
-            sentence = generate_sentence(res, start_var)
-            print(sentence)
-    except Exception as e:
-        return e
+    inp_file, sentences, start_var = read_inp()
+    res = parse_file(inp_file)
+
+    for x in range(sentences):
+        sentence = generate_sentence(res, start_var)
+        print(sentence)
 
 
 if __name__ == '__main__':

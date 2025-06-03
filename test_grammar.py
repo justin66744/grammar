@@ -58,6 +58,17 @@ class TestGrammar(unittest.TestCase):
        result = list(grammar.generate('NonExistent'))
        self.assertEqual(result, [])
 
+   def test_generate_with_mixed_symbols(self):
+       grammar = Grammar()
+       var_rule = Rules('OtherVar')
+       var_rule.add_option(1, [Terminal('other')])
+       grammar.add_rule('OtherVar', var_rule)
+
+       rule = Rules('TestVar')
+       rule.add_option(1, [Terminal('start'), Variable('OtherVar'), Terminal('end')])
+
+       res = list(rule.generate(grammar))
+       self.assertEqual(res, ['start', 'other', 'end'])
 
 
 

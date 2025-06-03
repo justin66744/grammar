@@ -13,15 +13,14 @@ class Rules:
     def generate(self, grammar):
         if not self._options:
             return
-        try:
-            selected = random.randrange(self._total_weight)
-            total = 0
-        except:
-            raise ValueError("Nothing to choose from")
+
+        selected = random.randrange(self._total_weight)
+        total = 0
+
 
         for weight, symbols in self._options:
             total += weight
-            if selected <= total:
+            if selected < total:
                 for symbol in symbols:
                     yield from symbol.generate(grammar)
                 break
